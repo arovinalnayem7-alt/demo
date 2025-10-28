@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProSafe Solutions | Risk Zone</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+            background-color: #f7fafc;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Custom class to simulate active filter button */
+        .filter-active {
+            @apply bg-teal-600 text-white shadow-md;
+        }
+        /* Custom styles for image size within the carousel */
+        .case-study-img {
+            max-height: 24rem; /* h-96 equivalent */
+            width: 100%;
+            object-fit: cover;
+        }
+        /* Style for the arrows on small screens */
+        @media (max-width: 768px) {
+            .carousel-nav-btn {
+                display: flex !important; /* Force display on mobile */
+                top: 30%; /* Move higher up on mobile to avoid card text area */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-lg p-4 md:p-6 lg:p-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="h-8 w-8 bg-teal-500 rounded-full flex items-center justify-center font-bold text-white text-lg">H&S</div>
+                <span class="text-xl md:text-2xl font-bold text-gray-800">ProSafe Solutions</span>
+            </a>
+            <div class="hidden md:flex space-x-8 lg:space-x-12">
+                <a href="index.html" class="text-gray-600 hover:text-teal-600 transition duration-300 font-medium">Home</a>
+                <a href="risk-zone.html" class="text-teal-600 font-semibold transition duration-300 border-b-2 border-teal-600">Risk Zone</a>
+                <a href="training.html" class="text-gray-600 hover:text-teal-600 transition duration-300 font-medium">Training</a>
+                <a href="courses.html" class="text-gray-600 hover:text-teal-600 transition duration-300 font-medium">Courses</a>
+                <a href="exam.html" class="text-gray-600 hover:text-teal-600 transition duration-300 font-medium">Exam</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden mt-4 hidden">
+            <div class="flex flex-col space-y-2">
+                <a href="index.html" class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Home</a>
+                <a href="risk-zone.html" class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Risk Zone</a>
+                <a href="training.html" class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Training</a>
+                <a href="courses.html" class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Courses</a>
+                <a href="exam.html" class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Exam</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto py-16 px-6 lg:px-12">
+        <!-- Title & Subtitle -->
+        <h2 class="text-3xl lg:text-4xl font-bold text-center mb-6 text-gray-800">Risk Zone</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Understanding and mitigating risk is at the core of our business. We classify hazards into key categories to ensure nothing is overlooked.</p>
+        
+        <!-- Featured Risk Case Study Section -->
+        <section class="mt-12 max-w-4xl mx-auto">
+            <h3 class="text-2xl font-bold text-center mb-10 text-gray-800 border-b-2 border-teal-500 pb-2">Featured Risk Engineering Case Studies</h3>
+            
+            <!-- Filter Buttons -->
+            <div class="flex justify-center space-x-3 mb-8 flex-wrap gap-y-3">
+                <button data-filter="all" class="filter-btn py-2 px-5 rounded-full text-gray-700 font-medium bg-white border border-gray-300 transition duration-300 hover:bg-teal-500 hover:text-white filter-active">All Case Studies</button>
+                <button data-filter="safe" class="filter-btn py-2 px-5 rounded-full text-gray-700 font-medium bg-white border border-gray-300 transition duration-300 hover:bg-teal-500 hover:text-white">Safe Area</button>
+                <button data-filter="risk" class="filter-btn py-2 px-5 rounded-full text-gray-700 font-medium bg-white border border-gray-300 transition duration-300 hover:bg-teal-500 hover:text-white">Risk Zone</button>
+                <button data-filter="high-risk" class="filter-btn py-2 px-5 rounded-full text-gray-700 font-medium bg-white border border-gray-300 transition duration-300 hover:bg-teal-500 hover:text-white">High Risk Zone</button>
+            </div>
+
+            <!-- CAROUSEL CONTAINER -->
+            <div id="carousel-container" class="relative">
+                
+                <!-- Navigation Arrows -->
+                <button id="prev-btn" class="carousel-nav-btn absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/50 text-white rounded-r-lg hover:bg-teal-600 transition duration-300 hidden md:flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="next-btn" class="carousel-nav-btn absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/50 text-white rounded-l-lg hover:bg-teal-600 transition duration-300 hidden md:flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <!-- 1. HIGH RISK ZONE Case Study -->
+                <div class="case-study-card bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200" data-category="high-risk" style="display: none;">
+                    <div class="relative bg-gray-100 h-96 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/arovinalnayem7-alt/demo/5138715368b1640bdf722c24b16c7edb3d8011c4/image/aovri-01.jpg" 
+                             alt="High Risk Zone Map" 
+                             class="case-study-img"
+                             onerror="this.onerror=null; this.src='https://placehold.co/900x500/dc2626/ffffff?text=HIGH+RISK+MAP+ERROR';">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white font-bold px-3 py-1 rounded-full text-sm shadow-lg">HIGH RISK</div>
+                    </div>
+
+                    <div class="p-6 md:p-8">
+                        <h4 class="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
+                            Extreme Hazard Mitigation in Geographically Challenging Regions
+                        </h4>
+                        <p class="text-lg text-gray-600 mb-4">
+                            In-depth engineering analysis and mitigation strategies for regions facing extreme natural or industrial hazards, requiring bespoke safety protocols.
+                        </p>
+                        <a href="#" class="text-teal-600 font-semibold hover:text-teal-800 transition duration-300 inline-block border-b-2 border-teal-600 hover:border-teal-800">
+                            Read Full Hazard Analysis
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. RISK ZONE (DANGER ZONE) Case Study -->
+                <div class="case-study-card bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200" data-category="risk" style="display: none;">
+                    <div class="relative bg-gray-100 h-96 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/arovinalnayem7-alt/demo/5138715368b1640bdf722c24b16c7edb3d8011c4/image/vecteezy_editable-polo-t-shirt-mockup-psd-template-ai-generated_34438402.jpg" 
+                             alt="Personnel PPE Audit" 
+                             class="case-study-img"
+                             onerror="this.onerror=null; this.src='https://placehold.co/900x500/f59e0b/ffffff?text=RISK+ZONE+IMAGE+ERROR';">
+                        <div class="absolute top-4 right-4 bg-orange-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow-lg">RISK ZONE</div>
+                    </div>
+
+                    <div class="p-6 md:p-8">
+                        <h4 class="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
+                            Critical PPE and Operational Risk Compliance Review
+                        </h4>
+                        <p class="text-lg text-gray-600 mb-4">
+                            Assessment of non-critical safety hazards and implementation of routine corrective action plans, focusing on standard operational risks and required PPE.
+                        </p>
+                        <a href="#" class="text-teal-600 font-semibold hover:text-teal-800 transition duration-300 inline-block border-b-2 border-teal-600 hover:border-teal-800">
+                            Review Compliance Strategy
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 3. SAFE AREA Case Study -->
+                <div class="case-study-card bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200" data-category="safe" style="display: none;">
+                    <div class="relative bg-gray-100 h-96 flex items-center justify-center">
+                        <img src="https://raw.githubusercontent.com/arovinalnayem7-alt/demo/5138715368b1640bdf722c24b16c7edb3d8011c4/image/WhatsApp%20Image%202024-05-27%20at%2014.31.18_758dff00.jpg" 
+                             alt="Safe Office Environment" 
+                             class="case-study-img"
+                             onerror="this.onerror=null; this.src='https://placehold.co/900x500/10b981/ffffff?text=SAFE+AREA+IMAGE+ERROR';">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow-lg">SAFE AREA</div>
+                    </div>
+
+                    <div class="p-6 md:p-8">
+                        <h4 class="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
+                            Ergonomic & Workplace Wellness Optimization Report
+                        </h4>
+                        <p class="text-lg text-gray-600 mb-4">
+                            Analysis focused on optimizing low-risk environments through advanced ergonomics, air quality monitoring, and long-term health planning.
+                        </p>
+                        <a href="#" class="text-teal-600 font-semibold hover:text-teal-800 transition duration-300 inline-block border-b-2 border-teal-600 hover:border-teal-800">
+                            Download Wellness Report
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-sm text-gray-500 mt-8" id="carousel-status">Viewing 1 of 3 case studies.</p>
+        </section>
+
+        <!-- NEW: Call to Action Button -->
+        <div class="mt-16 flex justify-center">
+            <a href="training.html" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-full shadow-xl text-white bg-teal-600 hover:bg-teal-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-teal-500 focus:ring-opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Let's Train Ourselves
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12 px-6 lg:px-12 mt-auto">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-white text-xl font-bold mb-4">ProSafe Solutions</h3>
+                <p>Dedicated to building a safer tomorrow through expert engineering and comprehensive training services.</p>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:text-teal-400 transition">Home</a></li>
+                    <li><a href="risk-zone.html" class="hover:text-teal-400 transition">Risk Zone</a></li>
+                    <li><a href="training.html" class="hover:text-teal-400 transition">Training</a></li>
+                    <li><a href="courses.html" class="hover:text-teal-400 transition">Courses</a></li>
+                    <li><a href="exam.html" class="hover:text-teal-400 transition">Exam</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-4">Contact Us</h3>
+                <address class="space-y-2 not-italic">
+                    <p>123 Safety Drive, Suite 456<br>
+                    Global City, PC 78901</p>
+                    <p>Email: <a href="mailto:info@prosafe.com" class="hover:text-teal-400 transition">info@prosafe.com</a></p>
+                    <p>Phone: (123) 456-7890</p>
+                </address>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-gray-500">
+            &copy; 2024 ProSafe Solutions. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Carousel Logic ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const allCards = document.querySelectorAll('.case-study-card');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const statusIndicator = document.getElementById('carousel-status');
+
+            let currentVisibleCards = [];
+            let currentIndex = 0;
+
+            const updateStatus = () => {
+                const count = currentVisibleCards.length;
+                const index = count > 0 ? currentIndex + 1 : 0;
+                statusIndicator.textContent = `Viewing ${index} of ${count} case studies.`;
+            }
+
+            const renderCurrentCard = () => {
+                // 1. Hide all cards
+                allCards.forEach(card => card.style.display = 'none');
+                
+                // 2. Determine if there are cards to show
+                if (currentVisibleCards.length === 0) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    updateStatus();
+                    return; 
+                }
+
+                // 3. Show only the current card
+                const cardToShow = currentVisibleCards[currentIndex];
+                cardToShow.style.display = 'block';
+
+                // 4. Update arrow visibility based on count (show if > 1 card)
+                if (currentVisibleCards.length > 1) {
+                    // Show on desktop, rely on CSS media query for mobile visibility
+                    prevBtn.style.display = 'flex'; 
+                    nextBtn.style.display = 'flex';
+                } else {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                }
+                updateStatus();
+            };
+            
+            const showNext = () => {
+                currentIndex = (currentIndex + 1) % currentVisibleCards.length;
+                renderCurrentCard();
+            };
+
+            const showPrev = () => {
+                currentIndex = (currentIndex - 1 + currentVisibleCards.length) % currentVisibleCards.length;
+                renderCurrentCard();
+            };
+            
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+
+
+            // --- Filtering Logic ---
+            const filterCaseStudies = (filter) => {
+                currentIndex = 0; // Always start at the first item when filtering
+
+                if (filter === 'all') {
+                    currentVisibleCards = Array.from(allCards);
+                } else {
+                    currentVisibleCards = Array.from(allCards).filter(card => 
+                        card.getAttribute('data-category') === filter
+                    );
+                }
+                renderCurrentCard();
+            };
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+
+                    // Update active button state
+                    filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+                    button.classList.add('filter-active');
+
+                    filterCaseStudies(filter);
+                });
+            });
+            
+            // Initialize: Show 'All Case Studies' on load
+            filterCaseStudies('all');
+        });
+    </script>
+</body>
+</html>
